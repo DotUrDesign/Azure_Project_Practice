@@ -318,6 +318,62 @@
 						}
 					]
 				}
+			},
+			{
+				"name": "Pipeline Success",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-18.eastus.logic.azure.com:443/workflows/edfe0bf38e404c6d82bbae4be3f97c3a/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=lXXkF4V5BZtLCsJQz7I0MZ-bo0YwpEBE-5lcqZ5VVAY",
+					"body": {
+						"value": "{\n    \"pipeline_name\" : @{pipeline().Pipeline},\n    \"pipeline_runId\" : @{pipeline().RunId}\n}",
+						"type": "Expression"
+					}
+				}
+			},
+			{
+				"name": "Pipeline Failure",
+				"type": "WebActivity",
+				"dependsOn": [
+					{
+						"activity": "ForEach1",
+						"dependencyConditions": [
+							"Failed"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "0.12:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"method": "POST",
+					"url": "https://prod-08.eastus.logic.azure.com:443/workflows/37755556839444ae90dbee3221dafab1/triggers/When_an_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_an_HTTP_request_is_received%2Frun&sv=1.0&sig=DcI8JzreaZS62mp71LrSlYedCoNTorcIs3W9vmptXuQ",
+					"body": {
+						"value": "{\n    \"pipeline_name\" : @{pipeline().Pipeline},\n    \"pipeline_runId\" : @{pipeline().RunId}\n}",
+						"type": "Expression"
+					}
+				}
 			}
 		],
 		"parameters": {
