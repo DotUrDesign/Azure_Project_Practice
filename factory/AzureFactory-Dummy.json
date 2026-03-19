@@ -1,0 +1,9 @@
+{
+	"name": "AzureFactory-Dummy",
+	"location": "uksouth",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "78febb8e-700d-4cab-8298-3cbb5a39430d",
+		"tenantId": "c2ade505-1511-49e8-a72d-73e493f6f28d"
+	}
+}
